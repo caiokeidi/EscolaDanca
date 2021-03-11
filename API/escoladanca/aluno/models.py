@@ -1,6 +1,8 @@
 from django.db import models
 
 class Aluno(models.Model):
+    objects = models.Manager()
+    
     primeiroNome = models.CharField(max_length=20)
     sobrenome = models.CharField(max_length=80)
     dataNascimento = models.DateField()
