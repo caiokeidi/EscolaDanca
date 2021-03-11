@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 from aluno.models import Aluno
 from professor.models import Professor
 
@@ -29,7 +30,7 @@ class Curso(models.Model):
 
 class Aula(models.Model):
     objects = models.Manager()
-    
+
     SEMANA = (
         ('SG', 'Segunda-Feira'),
         ('TR', 'Terça-Feira'),
@@ -46,8 +47,19 @@ class Aula(models.Model):
     horario = models.TimeField()
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     mensalidade = models.FloatField()
+    dataInicio = models.DateField(default=date.today)
     ativo = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.curso} - {self.diaSemana} {str(self.horario)}'
     
+
+class Inscricao(models.Model):
+    objects = models.Manager()
+
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    aula = models.ForeignKey(Aula, on_delete=models.CASCADE)
+
 
     
 
