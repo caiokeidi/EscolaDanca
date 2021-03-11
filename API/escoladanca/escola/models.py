@@ -1,5 +1,6 @@
 from django.db import models
 from aluno.models import Aluno
+from professor.models import Professor
 
 class Curso(models.Model):
     objects = models.Manager()
@@ -41,7 +42,9 @@ class Classe(models.Model):
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
     diaSemana = models.CharField(max_length=2, choices=SEMANA, blank=False, null=False, default='SG')
     horario = models.TimeField()
-    
+    professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
+    mensalidade = models.FloatField()
+    ativo = models.BooleanField(default=True)
     
 
     
