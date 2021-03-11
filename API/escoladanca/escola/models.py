@@ -27,7 +27,9 @@ class Curso(models.Model):
     def __str__(self):
         return self.nome
 
-class Classe(models.Model):
+class Aula(models.Model):
+    objects = models.Manager()
+    
     SEMANA = (
         ('SG', 'Segunda-Feira'),
         ('TR', 'Terça-Feira'),
