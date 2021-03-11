@@ -26,6 +26,23 @@ class Curso(models.Model):
     def __str__(self):
         return self.nome
 
+class Classe(models.Model):
+    SEMANA = (
+        ('SG', 'Segunda-Feira'),
+        ('TR', 'Terça-Feira'),
+        ('QA', 'Quarta-Feira'),
+        ('QI', 'Quinta-Feira'),
+        ('SE', 'Sexta-Feira'),
+        ('SA', 'Sábado'),
+        ('DM', 'Domingo'),
+    )
+    
+
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    diaSemana = models.CharField(max_length=2, choices=SEMANA, blank=False, null=False, default='SG')
+    horario = models.TimeField()
+    
+    
 
     
 
