@@ -10,7 +10,7 @@ class Curso(models.Model):
         ('I1', 'Infantil 1'),
         ('I2', 'Infantil 2'),
         ('B1', 'Básico 1'),
-        ('B2', 'Básico 2'),
+        ('B2', 'Básico 2'),        
         ('I1', 'Intermediário 1'),
         ('I2', 'Intermediário 2'),
         ('I3', 'Intermediário 3'),
