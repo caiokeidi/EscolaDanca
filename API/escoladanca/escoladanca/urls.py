@@ -5,6 +5,8 @@ from rest_framework import routers
 from escola.views import CursosViewSet, AulasViewSet, InscricoesViewSet
 from professor.views import ProfessoresViewSet
 from aluno.views import AlunoViewSet
+from escola import urls as escolaURLS
+
 
 router = routers.DefaultRouter()
 router.register('cursos', CursosViewSet, basename='Cursos')
@@ -15,5 +17,7 @@ router.register('alunos', AlunoViewSet, basename='Alunos')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('escola/', include(escolaURLS))
+
 ]

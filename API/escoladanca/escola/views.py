@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from escola.models import Curso, Aula, Inscricao
-from escola.serializer import CursoSerializer, AulaSerializer, InscricaoSerializer   
+from escola.serializer import CursoSerializer, AulaSerializer, InscricaoSerializer, InscricoesDoAlunoSerializer
 
 # class AlunosViewSet(viewsets.ModelViewSet):
 #     """Exibindo todos os alunos e alunas"""
@@ -21,3 +21,9 @@ class AulasViewSet(viewsets.ModelViewSet):
 class InscricoesViewSet(viewsets.ModelViewSet):
     queryset = Inscricao.objects.all()
     serializer_class = InscricaoSerializer
+
+class InscricoesDoAluno(generics.ListAPIView):
+    def get_queryset(self):
+        queryset = Inscricao.objects.filter(aluno_id = self.kwargs['pk'])
+        return queryset
+    serializer_class = InscricoesDoAlunoSerializer

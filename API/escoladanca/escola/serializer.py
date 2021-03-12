@@ -15,3 +15,10 @@ class InscricaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inscricao
         fields= "__all__"
+
+class InscricoesDoAlunoSerializer(serializers.ModelSerializer):
+    curso_nome = serializers.ReadOnlyField(source='aula.curso.nome')
+
+    class Meta:
+        model = Inscricao
+        fields = ['curso_nome']
