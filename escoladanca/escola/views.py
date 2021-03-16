@@ -13,10 +13,10 @@ from rest_framework.permissions import IsAuthenticated
 #     permission_classes = [IsAuthenticated]
 
 class CursosViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated,]
     queryset = Curso.objects.all()
     serializer_class = CursoSerializer
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+
 
 class AulasViewSet(viewsets.ModelViewSet):
     queryset = Aula.objects.all()

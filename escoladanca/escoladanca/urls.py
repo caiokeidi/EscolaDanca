@@ -7,6 +7,7 @@ from professor.views import ProfessoresViewSet
 from aluno.views import AlunoViewSet
 from escola import urls as escolaURLS
 from aluno import urls as alunoURLS
+from rest_framework_jwt.views import obtain_jwt_token
 
 
 router = routers.DefaultRouter()
@@ -20,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('escola/', include(escolaURLS)),
-    path('aluno/', include(alunoURLS))
+    path('aluno/', include(alunoURLS)),
+    path('token-auth/', obtain_jwt_token),
 
 ]
