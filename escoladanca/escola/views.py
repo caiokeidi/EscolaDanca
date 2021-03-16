@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets, generics
 from escola.models import Curso, Aula, Inscricao
 from escola.serializer import CursoSerializer, AulaSerializer, InscricaoSerializer, InscricoesDoAlunoSerializer
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 # class AlunosViewSet(viewsets.ModelViewSet):
 #     """Exibindo todos os alunos e alunas"""
@@ -13,6 +15,8 @@ from escola.serializer import CursoSerializer, AulaSerializer, InscricaoSerializ
 class CursosViewSet(viewsets.ModelViewSet):
     queryset = Curso.objects.all()
     serializer_class = CursoSerializer
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
 class AulasViewSet(viewsets.ModelViewSet):
     queryset = Aula.objects.all()

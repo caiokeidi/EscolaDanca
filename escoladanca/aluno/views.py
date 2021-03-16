@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+import json
 
 
 class AlunoViewSet(viewsets.ModelViewSet):
@@ -24,7 +25,13 @@ class AlunoViewSet(viewsets.ModelViewSet):
 def LoginView(request):
     
     if request.method == 'POST':
-        print(request)
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        email = body['email']
+        senha = body['password']
+        
+        
+
         return Response({'teste'})
     
     
