@@ -20,6 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username',)
 
 
+
 class UserSerializerWithToken(serializers.ModelSerializer):
 
     token = serializers.SerializerMethodField()
@@ -44,3 +45,17 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('token', 'username', 'password')
+
+
+
+class CadastroAlunoSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+       instance = self.Meta.model(**validated_data)
+
+       instance.save()
+       return instance
+
+
+    class Meta:
+        model = Aluno
+        fields = '__all__'

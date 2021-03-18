@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from aluno.serializer import AlunoSerializer, UserSerializer, UserSerializerWithToken
+from aluno.serializer import AlunoSerializer, UserSerializer, UserSerializerWithToken, CadastroAlunoSerializer
 from rest_framework import viewsets
 from aluno.models import Aluno
 from escola.models import Inscricao
@@ -53,6 +53,26 @@ def LoginView(request):
     
 
 
+class CadastroAluno(APIView):
+    
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request):
+        serializer = CadastroAlunoSerializer(data=request.data)
+        print(serializer)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        # serializer = UserSerializerWithToken(data=request.data)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 @api_view(['GET'])
@@ -60,6 +80,7 @@ def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
+    print(request.user)
     
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
